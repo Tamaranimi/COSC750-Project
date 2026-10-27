@@ -63,7 +63,7 @@ After a successful run:
 Windows:
 
 ```bat
-RUN_STAGE3_WINDOWS.bat
+.\RUN_STAGE3_WINDOWS.bat "PATH_TO_DATASET"
 ```
 
 Linux/macOS:
