@@ -93,4 +93,4 @@ python -m pytest -q
 
 ## Reproducibility note
 
-The dataset is intentionally not redistributed in this repository. Its license and source should be documented in the paper. Before submission, commit the generated result CSV/TeX files together with `run_metadata.json` so the exact environment and settings are visible.
+The dataset is intentionally not redistributed in this repository. Its license and source is documented in the paper.
