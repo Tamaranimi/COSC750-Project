@@ -24,32 +24,29 @@ The script expects the same corrected CIC-IDS2017 release used in Stages 1-2. It
 
 The project treats labels containing `Attempted` as benign by default, consistent with the Stage 1/2 protocol. Use `--attempted-policy exclude` for the planned sensitivity check.
 
+
 ## Setup - Windows
 
-Open Command Prompt in this repository and run:
+Download the corrected CIC-IDS2017 dataset separately.
 
-```bat
-RUN_STAGE3_WINDOWS.bat
+Open PowerShell in the project folder and run:
+
+```powershell
+.\RUN_STAGE3_WINDOWS.bat "PATH_TO_DATASET"
 ```
 
-The batch file assumes the data are in:
+Replace PATH_TO_DATASET with the directory containing
+the five weekday dataset files or their parent directory.
 
-```text
-%USERPROFILE%\Downloads\archive
+The script installs the required dependencies and
+reproduces the Stage 3 results.
+
+Run the automated tests with:
+
+```powershell
+python -m pytest -q
 ```
 
-Or run manually:
-
-```bat
-python -m pip install -r requirements.txt
-python run_stage3.py --data-dir "%USERPROFILE%\Downloads\archive" --output-dir results
-```
-
-## Setup - Linux/macOS
-
-```bash
-./run_stage3.sh "$HOME/Downloads/archive"
-```
 
 ## Output files
 

@@ -1,12 +1,26 @@
+
 @echo off
 setlocal
-python -m pip install -r requirements.txt
-python run_stage3.py --data-dir "%USERPROFILE%\Downloads\archive" --output-dir results
-if errorlevel 1 (
-  echo.
-  echo Stage 3 run failed. Read the error above before using any results.
-  exit /b 1
+
+cd /d "%~dp0"
+
+if "%~1"=="" (
+    echo ERROR: Dataset path not provided.
+    echo Usage: RUN_STAGE3_WINDOWS.bat "PATH_TO_DATASET"
+    exit /b 1
 )
+
+if not exist "%~1\" (
+    echo ERROR: Dataset folder not found.
+    exit /b 1
+)
+
+python -m pip install -r requirements.txt
+if errorlevel 1 exit /b 1
+
+python run_stage3.py --data-dir "%~1" --output-dir results
+if errorlevel 1 exit /b 1
+
 echo.
-echo Done. Send results\baseline_summary.csv and results\baseline_table_rows.tex back to ChatGPT to insert the actual numbers into the paper and slides.
+echo Stage 3 reproduction completed successfully.
 endlocal
