@@ -14,7 +14,7 @@ This repository reproduces the Stage 3 baseline table for the project **Cost-Sen
 - Stage 3 operating point: **1% attack prevalence**, `c_FP=1`, `c_FN=100`.
 - Required baselines:
   - **B1:** own NumPy diagonal Gaussian Bayes with MAP threshold 0.5.
-  - **B2:** cost-weighted RBF SVM (scikit-learn), sigmoid calibrated, validation-only threshold tuning.
+  - **B2:** Cost-weighted RBF SVM (scikit-learn), used as a strong published discriminative baseline for direct comparison with the Bayesian approach.
   - **B3:** always-pass trivial floor.
 - Also reports a **preliminary proposed-method** result: the same Gaussian posterior with the minimum-risk threshold `1/101`.
 
