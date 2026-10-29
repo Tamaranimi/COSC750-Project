@@ -1,0 +1,31 @@
+{
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "fractions": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "models": [
+    "Gaussian",
+    "SVM"
+  ],
+  "prevalence": 0.01,
+  "c_fp": 1,
+  "c_fn": 100,
+  "training_subset": "nested row subsamples within each fit temporal block and class; calibration blocks untouched",
+  "fit_calibration": "same original disjoint training-time blocks for each seed",
+  "preprocessing": "median imputation and scaling fitted only on each reduced fit subset; SVM CV preprocessing fit inside folds",
+  "svm_cv": "existing build_svm_search with 3-fold GroupKFold",
+  "calibration": "same sigmoid on unchanged calibration blocks",
+  "threshold": "Thursday expected cost",
+  "test": "Friday only",
+  "uncertainty": "sample SD across five seeds; no cluster bootstrap",
+  "caution": "subsets share underlying fit blocks; seed repeats not independent; row subsampling changes size but not block coverage"
+}
