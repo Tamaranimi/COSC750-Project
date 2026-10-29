@@ -1,0 +1,25 @@
+{
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "prevalence": 0.01,
+  "c_fp": 1,
+  "c_fn": 100,
+  "thursday_early_end": "2017-07-06 05:00:00",
+  "thursday_late_start": "2017-07-06 08:50:00",
+  "model_training": "Monday-Wednesday fit blocks",
+  "comparison": "original training-block sigmoid vs new sigmoid on earlier Thursday labelled blocks",
+  "threshold": "later Thursday blocks only; both strategies independently threshold-tuned",
+  "test": "Friday only; no Friday labels used for fitting or tuning",
+  "caveats": [
+    "Thursday early calibration labels are required and are unavailable in true unsupervised deployment",
+    "Brier/log-loss evaluated at observed Friday class mix, unlike 1% hypothetical expected cost",
+    "prior correction assumes stable class-conditional distributions",
+    "This experiment changes calibration data; differences do not isolate temporal drift from sample size/composition",
+    "Five seeds are related samples, not independent datasets"
+  ]
+}
