@@ -1,0 +1,30 @@
+{
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "components": [
+    10,
+    20,
+    40,
+    60
+  ],
+  "models": [
+    "Gaussian",
+    "SVM"
+  ],
+  "prevalence": 0.01,
+  "c_fp": 1,
+  "c_fn": 100,
+  "fit_calibration": "disjoint training time blocks from existing sampler",
+  "preprocessing": "median imputation, scaling, PCA fitted on training only; within CV folds for SVM",
+  "svm_cv": "3-fold GroupKFold, C in [1,10], gamma scale, average precision",
+  "calibration": "sigmoid on calibration blocks",
+  "threshold": "Thursday validation expected cost",
+  "test": "Friday only",
+  "uncertainty": "across-seed sample SD, no cluster bootstrap",
+  "comparison_note": "PCA sensitivity within this experiment; separate original no-PCA experiment for context"
+}
