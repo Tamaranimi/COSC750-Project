@@ -313,7 +313,7 @@ Run the automated tests:
 python -m pytest -q
 ```
 
-The automated test suite previously passed locally with six tests.
+The fresh-download verification run on October 29, 2026, passed **all 3 available automated tests** (`3 passed in 3.81s`).
 
 ### Matched-protocol experiment
 
@@ -335,9 +335,16 @@ python verify_stage3.py --data-dir "C:\path\to\CICIDS2017_Timestamped_Clean" --o
 
 The combined verification script is designed to run the tests, reproduce the matched-protocol experiment, check reported numerical results, and run the known-family diagnostic.
 
-The matched-protocol numerical checks previously passed locally at the reported precision, and the known-family experiment completed for all five seeds.
+**Verified October 29, 2026, using a freshly downloaded GitHub ZIP and the existing prepared eight-file Parquet dataset:**
 
-**Current GitHub dependency gap:** Before a fresh clone can run the newer experiment scripts, the helper modules `temporal_blocks.py`, `five_seed_sampling.py`, and `svm_pipeline.py` must be added to the repository or their imports must be resolved. Successful execution on the original local machine does not establish that a fresh GitHub clone is fully reproducible.
+- `python -m pytest -q`: **3 passed in 3.81s**.
+- Dataset loader: **2,830,743 records from eight files; 203 exact duplicates removed**.
+- Matched-protocol evaluation: **all five seeds (11, 22, 33, 44, 55) completed**.
+- Script output: **`PASS: matched-protocol paper costs and six unseen-family recalls reproduce at reported precision`**.
+- Known-family holdout: **all five seeds (11, 22, 33, 44, 55) completed**, with saved output in `verification_complete/known_family`.
+- Final script output: **`Verification complete`**.
+
+The repository contains `temporal_blocks.py`, `five_seed_sampling.py`, `svm_pipeline.py`, `sampling_config.py`, and `fast_bootstrap.py`; the previous missing-helper warning is resolved. The verification establishes successful reproduction from a fresh GitHub download **using the already prepared dataset**, not independent reconstruction of the dataset from the original CIC-IDS2017 CSV files. The local `verification_complete/` outputs are not claimed to be committed to GitHub.
 
 ## 11. Research Limitations
 
@@ -350,7 +357,7 @@ The matched-protocol numerical checks previously passed locally at the reported 
 7. Some known attack families have results for fewer than five eligible seeds.
 8. Strong performance under one prevalence or cost assumption does not guarantee strong performance under another.
 9. The original archived baseline and the later matched-protocol extension use distinct dataset preparations and should be interpreted separately.
-10. Complete fresh-clone reproducibility requires resolving the missing helper-module dependencies.
+10. The code and reported primary results were reproduced from a fresh GitHub download with the prepared dataset on October 29, 2026; raw-CSV-to-Parquet preparation remains to be independently reproduced.
 
 ## 12. Key Findings and Conclusion
 
@@ -375,13 +382,12 @@ Overall, the research highlights the importance of calibrated probabilities, asy
 - PCA sensitivity.
 - Training-size sensitivity.
 - Temporal recalibration.
-- Local matched-protocol verification against reported values.
+- Fresh-download verification on October 29, 2026: 3/3 tests passed; five matched-protocol seeds and five known-family seeds completed; reported costs and six unseen-family recall values reproduced at stated precision.
 
 **Remaining reproducibility work:**
 
-- Upload missing helper modules required by the new experiment scripts.
-- Document the complete dataset preparation pipeline.
-- Verify the full workflow from a clean GitHub clone.
+- Document and independently reproduce the original CIC-IDS2017 CSV-to-Parquet preparation pipeline.
+- Optionally validate the complete process on a separate clean machine/environment using raw source files.
 
 ---
 
