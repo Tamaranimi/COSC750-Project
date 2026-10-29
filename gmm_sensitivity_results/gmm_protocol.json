@@ -1,0 +1,23 @@
+{
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "components": [
+    1,
+    2,
+    4
+  ],
+  "prevalence": 0.01,
+  "c_fp": 1,
+  "c_fn": 100,
+  "fit_calibration": "same disjoint training-time blocks as matched protocol",
+  "calibration": "sigmoid on calibration blocks",
+  "threshold": "Thursday expected cost",
+  "test": "Friday only",
+  "uncertainty": "across-seed sample SD; no cluster bootstrap in this extension",
+  "note": "GMM uses diagonal covariance and per-class EM fitting; GMM-1 is not guaranteed numerically identical to earlier Gaussian implementation"
+}
