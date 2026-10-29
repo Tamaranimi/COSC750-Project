@@ -1,0 +1,22 @@
+{
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "prevalences": [
+    0.001,
+    0.01,
+    0.05,
+    0.1,
+    0.16
+  ],
+  "grouping": "whole 10-minute timestamp blocks",
+  "calibration": "identical sigmoid on disjoint training blocks",
+  "threshold": "identical validation expected cost",
+  "uncertainty": "whole Friday 10-minute-block bootstrap",
+  "prior_shift": "posterior odds correction assumes invariant class-conditional feature distributions",
+  "limitations": "family-conditional expected cost uses common benign FPR and attack-family-specific FNR; not a separate family prevalence estimate"
+}
