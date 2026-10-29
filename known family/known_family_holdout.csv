@@ -1,0 +1,11 @@
+seed,method,prevalence,threshold,evaluation,family,group,n_attacks,attack_recall,benign_fpr,conditional_expected_cost
+11,Gaussian,0.01,0.04488420856912135,held-out Monday-Wednesday blocks,SSH-Patator,known,965,1.0,0.016183685770411526,0.01602184891270741
+11,SVM,0.01,0.0058435482834418555,held-out Monday-Wednesday blocks,SSH-Patator,known,965,0.0,0.4625966976786311,1.4579707307018448
+33,Gaussian,0.01,0.10956918956477578,held-out Monday-Wednesday blocks,SSH-Patator,known,1904,0.9973739495798319,0.015825859491778775,0.018293651317029057
+33,SVM,0.01,0.009140763712095703,held-out Monday-Wednesday blocks,SSH-Patator,known,1904,0.0010504201680672232,0.4845328849028401,1.4786371358857444
+44,Gaussian,0.01,0.0,held-out Monday-Wednesday blocks,DoS slowloris,known,725,1.0,1.0,0.99
+44,Gaussian,0.01,0.0,held-out Monday-Wednesday blocks,FTP-Patator,known,5228,1.0,1.0,0.99
+44,SVM,0.01,0.03691079983265414,held-out Monday-Wednesday blocks,DoS slowloris,known,725,0.9420689655172414,0.06833754245406252,0.12558520151228053
+44,SVM,0.01,0.03691079983265414,held-out Monday-Wednesday blocks,FTP-Patator,known,5228,1.0,0.06833754245406252,0.0676541670295219
+55,Gaussian,0.01,0.13215899723160165,held-out Monday-Wednesday blocks,SSH-Patator,known,1888,0.4777542372881356,0.09229790588848323,0.6136206895414628
+55,SVM,0.01,0.0001283437754712663,held-out Monday-Wednesday blocks,SSH-Patator,known,1888,0.9989406779661016,0.042247659393049405,0.042884504833017215

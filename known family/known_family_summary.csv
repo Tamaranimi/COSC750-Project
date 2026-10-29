@@ -1,0 +1,7 @@
+method,family,seeds,attack_recall_mean,attack_recall_std,n_attacks_per_seed_mean
+Gaussian,DoS slowloris,1,1.0,,725.0
+Gaussian,FTP-Patator,1,1.0,,5228.0
+Gaussian,SSH-Patator,3,0.8250427289559892,0.3007635223375699,1585.6666666666667
+SVM,DoS slowloris,1,0.9420689655172414,,725.0
+SVM,FTP-Patator,1,1.0,,5228.0
+SVM,SSH-Patator,3,0.33333036604472294,0.5764356784132022,1585.6666666666667

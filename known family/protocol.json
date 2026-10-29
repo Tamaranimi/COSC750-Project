@@ -1,0 +1,78 @@
+{
+  "purpose": "Separate exploratory known-family diagnostic; NOT Friday chronological test",
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "prevalence": 0.01,
+  "holdout_fraction": 0.2,
+  "block_split": "whole Monday-Wednesday 10-minute blocks excluded before fitting",
+  "calibration": "disjoint remaining Monday-Wednesday training blocks, sigmoid for both methods",
+  "threshold": "Thursday expected-cost validation, no known-holdout tuning",
+  "limitations": [
+    "known holdout is within training weekdays, not a future-time test",
+    "different time periods and attack families prevent controlled known-versus-unseen causal attribution",
+    "not directly comparable with previously archived Friday model scores",
+    "family recall is conditional on family; family-conditional cost uses shared benign FPR"
+  ],
+  "per_seed": [
+    {
+      "seed": 11,
+      "fit_rows": 32787,
+      "calibration_rows": 15284,
+      "known_holdout_rows": 333552,
+      "holdout_attack_families": [
+        "DoS Hulk",
+        "DoS Slowhttptest",
+        "Heartbleed",
+        "SSH-Patator"
+      ]
+    },
+    {
+      "seed": 22,
+      "fit_rows": 38877,
+      "calibration_rows": 8500,
+      "known_holdout_rows": 296743,
+      "holdout_attack_families": [
+        "FTP-Patator"
+      ]
+    },
+    {
+      "seed": 33,
+      "fit_rows": 39398,
+      "calibration_rows": 10094,
+      "known_holdout_rows": 366557,
+      "holdout_attack_families": [
+        "DoS Hulk",
+        "Heartbleed",
+        "SSH-Patator"
+      ]
+    },
+    {
+      "seed": 44,
+      "fit_rows": 39123,
+      "calibration_rows": 8595,
+      "known_holdout_rows": 391028,
+      "holdout_attack_families": [
+        "DoS Hulk",
+        "DoS slowloris",
+        "FTP-Patator",
+        "SSH-Patator"
+      ]
+    },
+    {
+      "seed": 55,
+      "fit_rows": 37120,
+      "calibration_rows": 8595,
+      "known_holdout_rows": 300065,
+      "holdout_attack_families": [
+        "FTP-Patator",
+        "Heartbleed",
+        "SSH-Patator"
+      ]
+    }
+  ]
+}
