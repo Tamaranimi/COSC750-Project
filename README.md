@@ -5,6 +5,8 @@
 **Course:** COSC 750 — Pattern Recognition I  
 **Semester:** Fall 2026
 
+---
+
 ## 1. Project Overview
 
 **Research Title:** Cost-Sensitive Bayesian Decisions for Network Intrusion Detection: Performance Under Class Imbalance and Temporal Drift
@@ -34,20 +36,47 @@ The study includes:
 
 The matched-protocol experiments use a locally prepared dataset named `CICIDS2017_Timestamped_Clean`, stored as eight Parquet files.
 
+### Dataset Preparation and Provenance
+
+The original CIC-IDS2017 CSV files were prepared locally and converted into Parquet format on October 28–29, 2026.
+
+The recorded preparation process included:
+
+- Reading the original CIC-IDS2017 CSV files.
+- Preserving timestamp information for chronological evaluation.
+- Removing all-empty rows.
+- Converting the prepared data into Parquet format.
+- Generating eight Parquet files in the `CICIDS2017_Timestamped_Clean` directory.
+- Loading and deduplicating the prepared dataset before model evaluation.
+
+The local CSV-to-Parquet conversion was completed and repeated during project development.
+
+### Dataset Statistics
+
 | Dataset characteristic | Recorded value |
 |---|---:|
-| Records loaded | 2,830,743 |
+| All-empty rows removed during preparation | 288,602 |
+| Parquet files generated | 8 |
+| Records loaded from prepared files | 2,830,743 |
 | Exact duplicate records removed | 203 |
-| Records remaining | 2,830,540 |
+| Records remaining after deduplication | 2,830,540 |
 | Numeric features | 80 |
 
 The dataset is not redistributed through this repository.
 
-**Data provenance limitation:** The complete original CSV-to-Parquet preparation procedure has not yet been independently verified. The locally prepared dataset is distinct from the separately archived Distrinet baseline dataset and should not be treated as identical.
+### Dataset Verification
+
+On October 29, 2026, the experimental workflow was verified using a freshly downloaded copy of the GitHub repository and the existing prepared eight-file Parquet dataset.
+
+The verification successfully reproduced the reported matched-protocol expected costs and six previously unseen attack-family recall values at the stated precision.
+
+**Reproducibility scope:** The original CSV-to-Parquet preparation was performed and repeated locally. The October 29 fresh-download verification reproduced the experimental workflow using the prepared Parquet dataset. It did not independently recreate those Parquet files from the original raw CSV files in a separate clean environment.
+
+The locally prepared dataset is distinct from the separately archived Distrinet baseline dataset and should not be treated as identical.
 
 ## 3. Research Methodology
 
-### Temporal evaluation
+### Temporal Evaluation
 
 The primary chronological experiment uses:
 
@@ -67,7 +96,7 @@ The matched-protocol experiment separates model fitting and probability calibrat
 
 **Additional experiments:** Gaussian mixture models, PCA dimensionality reduction, training-size sensitivity, and recalibration.
 
-### Cost-sensitive evaluation
+### Cost-Sensitive Evaluation
 
 The primary operating assumptions are:
 
@@ -148,7 +177,7 @@ An additional exploratory experiment evaluates attack families represented durin
 
 **Results directory:** `known family/`
 
-### Experimental procedure
+### Experimental Procedure
 
 - Whole 10-minute timestamp blocks are withheld from Monday–Wednesday data before model fitting.
 - Remaining training blocks are used for model fitting and separate probability calibration.
@@ -156,7 +185,7 @@ An additional exploratory experiment evaluates attack families represented durin
 - Withheld Monday–Wednesday blocks are evaluated independently.
 - Five random seeds are used.
 
-### Known-family results
+### Known-Family Results
 
 Mean attack recall at 1% assumed prevalence:
 
@@ -180,7 +209,7 @@ The DoS slowloris and FTP-Patator summaries each contain only one eligible seed.
 
 ## 7. Additional Sensitivity Experiments
 
-### Gaussian mixture complexity
+### Gaussian Mixture Complexity
 
 **Script:** `run_gmm_sensitivity.py`
 
@@ -194,7 +223,7 @@ Increasing mixture complexity did not consistently reduce expected cost.
 
 **Results:** `gmm_sensitivity_results/`
 
-### PCA dimensionality sensitivity
+### PCA Dimensionality Sensitivity
 
 **Script:** `run_pca_sensitivity.py`
 
@@ -209,7 +238,7 @@ The lowest observed Gaussian cost occurred at 40 dimensions, while the lowest SV
 
 **Results:** `pca_sensitivity_results/`
 
-### Training-size sensitivity
+### Training-Size Sensitivity
 
 **Script:** `run_training_size_sensitivity.py`
 
@@ -224,7 +253,7 @@ Increasing training size produced modest changes in Gaussian performance and a l
 
 **Results:** `training_size_results/`
 
-### Temporal recalibration
+### Temporal Recalibration
 
 **Script:** `run_drift_recalibration.py`
 
@@ -294,20 +323,20 @@ python -m pip install -r requirements_verified.txt
 
 ## 10. Reproducing the Experiments
 
-Clone the repository:
+### Clone the Repository
 
 ```powershell
 git clone https://github.com/Tamaranimi/COSC750-Project.git
 cd COSC750-Project
 ```
 
-Install dependencies:
+### Install Dependencies
 
 ```powershell
 python -m pip install -r requirements_verified.txt
 ```
 
-Run the automated tests:
+### Run Automated Tests
 
 ```powershell
 python -m pytest -q
@@ -315,41 +344,47 @@ python -m pytest -q
 
 The fresh-download verification run on October 29, 2026, passed **all 3 available automated tests** (`3 passed in 3.81s`).
 
-### Matched-protocol experiment
+### Matched-Protocol Experiment
 
 ```powershell
 python run_feedback_protocol.py --data-dir "C:\path\to\CICIDS2017_Timestamped_Clean" --output-dir matched
 ```
 
-### Known-family experiment
+### Known-Family Experiment
 
 ```powershell
 python run_known_family_holdout.py --data-dir "C:\path\to\CICIDS2017_Timestamped_Clean" --output-dir "known family"
 ```
 
-### Combined verification
+### Combined Verification
 
 ```powershell
 python verify_stage3.py --data-dir "C:\path\to\CICIDS2017_Timestamped_Clean" --output-dir verification_complete
 ```
 
-The combined verification script is designed to run the tests, reproduce the matched-protocol experiment, check reported numerical results, and run the known-family diagnostic.
+The combined verification script is designed to run the automated tests, reproduce the matched-protocol experiment, check reported numerical results, and run the known-family diagnostic.
 
-**Verified October 29, 2026, using a freshly downloaded GitHub ZIP and the existing prepared eight-file Parquet dataset:**
+### Fresh-Download Verification — October 29, 2026
+
+The following results were recorded using a freshly downloaded GitHub ZIP and the existing prepared eight-file Parquet dataset:
 
 - `python -m pytest -q`: **3 passed in 3.81s**.
 - Dataset loader: **2,830,743 records from eight files; 203 exact duplicates removed**.
 - Matched-protocol evaluation: **all five seeds (11, 22, 33, 44, 55) completed**.
-- Script output: **`PASS: matched-protocol paper costs and six unseen-family recalls reproduce at reported precision`**.
+- Verification output: **`PASS: matched-protocol paper costs and six unseen-family recalls reproduce at reported precision`**.
 - Known-family holdout: **all five seeds (11, 22, 33, 44, 55) completed**, with saved output in `verification_complete/known_family`.
-- Final script output: **`Verification complete`**.
+- Final verification output: **`Verification complete`**.
 
-The repository contains `temporal_blocks.py`, `five_seed_sampling.py`, `svm_pipeline.py`, `sampling_config.py`, and `fast_bootstrap.py`; the previous missing-helper warning is resolved. The verification establishes successful reproduction from a fresh GitHub download **using the already prepared dataset**, not independent reconstruction of the dataset from the original CIC-IDS2017 CSV files. The local `verification_complete/` outputs are not claimed to be committed to GitHub.
+The repository contains `temporal_blocks.py`, `five_seed_sampling.py`, `svm_pipeline.py`, `sampling_config.py`, and `fast_bootstrap.py`; the previous missing-helper warning is resolved.
+
+The fresh-download verification establishes successful experimental reproduction using the already prepared dataset. The local `verification_complete/` outputs are not claimed to be committed to GitHub.
+
+The original raw CSV-to-Parquet preparation was separately completed and repeated locally during October 28–29, 2026.
 
 ## 11. Research Limitations
 
 1. CIC-IDS2017 represents historical traffic from a controlled experimental environment.
-2. The exact local CSV-to-Parquet preparation process requires further documentation.
+2. The original CSV-to-Parquet preparation was completed and repeated locally. However, the October 29 fresh-download verification used the prepared Parquet files rather than independently reconstructing them from raw CSV files in a separate clean environment.
 3. Five seeds provide repeated measurements but do not constitute five independent datasets.
 4. Deployment-prevalence adjustment assumes sufficiently stable class-conditional feature distributions.
 5. Calibration and threshold selection may be sensitive to temporal distribution changes.
@@ -357,7 +392,7 @@ The repository contains `temporal_blocks.py`, `five_seed_sampling.py`, `svm_pipe
 7. Some known attack families have results for fewer than five eligible seeds.
 8. Strong performance under one prevalence or cost assumption does not guarantee strong performance under another.
 9. The original archived baseline and the later matched-protocol extension use distinct dataset preparations and should be interpreted separately.
-10. The code and reported primary results were reproduced from a fresh GitHub download with the prepared dataset on October 29, 2026; raw-CSV-to-Parquet preparation remains to be independently reproduced.
+10. The code and reported primary experimental results were successfully reproduced from a fresh GitHub download on October 29, 2026, using the prepared eight-file Parquet dataset. This confirms experimental reproducibility for the documented input dataset; independent end-to-end reproduction starting from the original raw CSV files remains a separate verification step.
 
 ## 12. Key Findings and Conclusion
 
@@ -371,8 +406,13 @@ Overall, the research highlights the importance of calibrated probabilities, asy
 
 ## 13. Repository and Research Status
 
-**Completed:**
+### Completed
 
+- Original CIC-IDS2017 CSV-to-Parquet preparation completed and repeated locally on October 28–29, 2026.
+- Timestamp information preserved during dataset preparation.
+- Eight prepared Parquet files generated.
+- Recorded removal of 288,602 all-empty rows during preparation.
+- Dataset loading and exact deduplication verified: 2,830,743 records loaded, 203 duplicates removed, and 2,830,540 records retained.
 - Baseline and matched-protocol model comparisons.
 - Five-seed matched-protocol evaluation.
 - Attack-prevalence sensitivity.
@@ -382,12 +422,8 @@ Overall, the research highlights the importance of calibrated probabilities, asy
 - PCA sensitivity.
 - Training-size sensitivity.
 - Temporal recalibration.
-- Fresh-download verification on October 29, 2026: 3/3 tests passed; five matched-protocol seeds and five known-family seeds completed; reported costs and six unseen-family recall values reproduced at stated precision.
+- Fresh-download verification on October 29, 2026: three automated tests passed, all five matched-protocol and known-family seeds completed, and reported costs and six unseen-family recall values reproduced at stated precision.
 
-**Remaining reproducibility work:**
-
-- Document and independently reproduce the original CIC-IDS2017 CSV-to-Parquet preparation pipeline.
-- Optionally validate the complete process on a separate clean machine/environment using raw source files.
 
 ---
 
