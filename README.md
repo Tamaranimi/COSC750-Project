@@ -344,6 +344,31 @@ python -m pytest -q
 
 The fresh-download verification run on October 29, 2026, passed **all 3 available automated tests** (`3 passed in 3.81s`).
 
+### One-Command Reproduction of the Archived Stage 3 Baseline Table
+
+The **archived baseline** uses the five corrected Distrinet-CIC-IDS2017 weekday CSV/Parquet files (82 numeric features), **not** the eight timestamped Parquet files used for the separate matched-protocol extension. Obtain the appropriate corrected dataset locally; the dataset is not redistributed here.
+
+From Windows PowerShell in the repository root:
+
+```powershell
+.\RUN_STAGE3_WINDOWS.bat "C:\path\to\Corrected_CIC_IDS2017"
+```
+
+Replace the placeholder path with the actual folder containing the five weekday files. The batch file installs `requirements.txt`, invokes `run_stage3.py` with five fixed seeds (11, 22, 33, 44, 55), and writes `results/baseline_runs.csv`, `results/baseline_summary.csv`, `results/baseline_table_rows.tex`, and `results/run_metadata.json`. **The results folder is overwritten by a new run**; preserve the committed reference outputs first if you want to compare them afterward.
+
+Reference expected costs (mean ± sample SD across five seeds) from the committed `results/baseline_summary.csv`:
+
+| Archived method | Expected cost |
+|---|---:|
+| Always-pass | 1.0000 ± 0.0000 |
+| Gaussian Bayes (MAP) | 0.2249 ± 0.0089 |
+| Cost-weighted RBF-SVM | 0.1249 ± 0.0837 |
+| Proposed Gaussian minimum-risk | 0.2304 ± 0.0080 |
+
+**Execution evidence and limits:** The archived five-seed baseline was executed locally on October 22, 2026, and its result CSV and environment metadata were committed to this repository. The October 29 fresh-download verification independently reran the **separate matched-protocol and known-family workflows** from the prepared eight-file Parquet dataset (three tests passed; five seeds completed; reported values reproduced). It did **not** rerun the archived `RUN_STAGE3_WINDOWS.bat` launcher or independently rebuild the prepared Parquet files from raw CSVs. No GitHub-hosted CI run is claimed.
+
+**Published-method provenance:** The strong comparator is an implemented cost-weighted RBF-SVM following Cortes and Vapnik's published SVM framework, with Platt-style sigmoid probability calibration using scikit-learn. The numerical results above are this project's own experimental outputs, **not** numbers copied from a published CIC-IDS2017 benchmark. The archived SVM CV preprocesses the sampled training partition before its internal CV folds; it never fits preprocessing on Thursday or Friday, but this training-fold preprocessing is less isolated than the later matched-protocol pipeline, which refits preprocessing within each training CV fold.
+
 ### Matched-Protocol Experiment
 
 ```powershell
