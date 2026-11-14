@@ -530,3 +530,46 @@ Run paired statistical analysis using the generated CSV files:
 The commands above document how to regenerate the Stage 4 analyses.
 The Stage 4 experiments were not independently rerun in the clean clone
 during the November 14 verification.
+
+## Stage 4 Manuscript Figure Reproduction
+
+All three figures in the final Stage 4 manuscript can be
+regenerated from the saved experimental CSV inputs.
+
+### Requirements
+
+- Python 3
+- numpy
+- pandas
+- matplotlib
+
+Install dependencies:
+
+    python -m pip install numpy pandas matplotlib
+
+### Regenerate all manuscript figures
+
+From the repository root:
+
+    cd paper_figures
+    python regenerate_figures.py
+
+The script reads:
+
+- figure_data_threshold.csv
+- figure_data_weights.csv
+- figure_data_paired.csv
+
+It generates:
+
+- figures/threshold_ablation.pdf
+- figures/paired_effects.pdf
+- figures/svm_weights.pdf
+
+These figures are saved as vector PDFs.
+
+The CSV files contain saved experimental results. Regenerating
+the figures does not require retraining the models.
+
+To reproduce the underlying experiments, consult the Stage 4
+experiment scripts and instructions in this repository.
