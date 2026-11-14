@@ -1,0 +1,22 @@
+{
+  "comparison": "Platt sigmoid versus heuristic raw-score mapping; same fitted model per seed",
+  "uncalibrated_gaussian": "native Gaussian posterior, clipped to [1e-8, 1-1e-8]",
+  "uncalibrated_svm": "expit(raw decision_function); heuristic only, NOT a calibrated probability",
+  "calibration": "LogisticRegression(C=1e6) fitted on disjoint Monday-Wednesday calibration blocks",
+  "model_training": "original cost-weighted SVM and Gaussian; unchanged Stage 3 settings",
+  "threshold": "Thursday validation expected-cost minimization independently per variant",
+  "prior_adjustment": "odds correction applied for consistency; probabilistic interpretation of uncalibrated arm is NOT justified",
+  "probability_metrics": "Friday observed prevalence; NOT target 1% prevalence; exploratory temporal-generalization metrics",
+  "Friday_policy": "Friday labels only for evaluation, not fitting, calibration, or threshold tuning",
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "prevalence": 0.01,
+  "false_positive_cost": 1.0,
+  "false_negative_cost": 100.0,
+  "data_directory": "C:\\Users\\kenan\\OneDrive\\Desktop\\BSU\\Courses\\Doctoral Courses\\Fall 2026\\COSC 750\\Project\\Stage 3 files\\CICIDS2017_Timestamped_Clean"
+}

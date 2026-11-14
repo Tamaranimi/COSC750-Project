@@ -1,0 +1,21 @@
+{
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "prevalence": 0.01,
+  "false_positive_cost": 1.0,
+  "false_negative_cost": 100.0,
+  "data_directory": "C:\\Users\\kenan\\OneDrive\\Desktop\\BSU\\Courses\\Doctoral Courses\\Fall 2026\\COSC 750\\Project\\Stage 3 files\\CICIDS2017_Timestamped_Clean",
+  "comparison": "Decision threshold only; identical fitted and calibrated models within each seed",
+  "thresholds": [
+    "fixed_0_5",
+    "bayes_cost_threshold",
+    "thursday_optimized"
+  ],
+  "validation_policy": "Thursday selects tuned threshold; Friday evaluation only",
+  "interpretation_note": "This is a threshold ablation, not a calibration or SVM class-weight ablation."
+}

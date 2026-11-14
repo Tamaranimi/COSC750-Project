@@ -456,3 +456,77 @@ Overall, the research highlights the importance of calibrated probabilities, asy
 **Institution:** Bowie State University  
 **Researcher:** Nimi Kenanagha  
 **Academic term:** Fall 2026
+## 14. Stage 4 Final Experiments and Reproducibility
+
+Stage 4 includes threshold ablation, calibration analysis,
+SVM class-weight sensitivity, and paired statistical analysis.
+
+Scripts:
+- run_stage4_ablation.py
+- run_stage4_calibration.py
+- run_stage4_svm_weights.py
+- run_stage4_statistics.py
+
+Experimental protocol:
+- Dataset: CIC-IDS2017
+- Training: Monday-Wednesday
+- Validation: Thursday
+- Testing: Friday
+- Seeds: 11, 22, 33, 44, 55
+- Deployment attack prevalence: 1%
+- False-negative cost: 100
+- False-positive cost: 1
+
+Primary results:
+- Gaussian NB mean cost: 0.956126
+- Weighted RBF-SVM mean cost: 0.598924
+- Unweighted RBF-SVM mean cost: 0.560531
+
+The five exploratory ablation comparisons were not statistically
+significant after Holm correction.
+
+Verification completed November 14, 2026:
+- Seven automated tests passed.
+- Eight Parquet files loaded.
+- 2,830,743 records loaded.
+- 203 exact duplicates removed.
+- 2,830,540 records retained.
+- All five matched-protocol seeds completed.
+- Paper costs and six unseen-family recalls reproduced.
+- Verification completed successfully twice, with exit code 0.
+
+Stage 4 saved CSV summaries were checked against reported results.
+The Stage 4 ablation experiments were not independently rerun
+during the clean-clone verification.
+
+Core reproduction command:
+
+    python verify_stage3.py --data-dir "PATH_TO_PARQUET_DIRECTORY" --output-dir verification_stage4_final --skip-known
+
+The raw dataset and regenerable verification outputs are excluded
+from version control.
+
+### Exact Stage 4 reproduction commands
+
+The following commands assume that `DATA_DIR` points to the prepared
+eight-file CIC-IDS2017 Parquet dataset.
+
+Run threshold ablation:
+
+    python run_stage4_ablation.py --data-dir "DATA_DIR" --output-dir stage4_ablation_results --seeds 11 22 33 44 55 --prevalence 0.01 --fp-cost 1 --fn-cost 100
+
+Run calibration comparison:
+
+    python run_stage4_calibration.py --data-dir "DATA_DIR" --output-dir stage4_calibration_results --seeds 11 22 33 44 55 --prevalence 0.01 --fp-cost 1 --fn-cost 100
+
+Run SVM class-weight comparison:
+
+    python run_stage4_svm_weights.py --data-dir "DATA_DIR" --output-dir stage4_svm_weight_results --seeds 11 22 33 44 55 --prevalence 0.01 --fp-cost 1 --fn-cost 100
+
+Run paired statistical analysis using the generated CSV files:
+
+    python run_stage4_statistics.py --threshold-csv stage4_ablation_results/ablation_runs.csv --weight-csv stage4_svm_weight_results/svm_weight_runs.csv --output-dir stage4_statistical_results
+
+The commands above document how to regenerate the Stage 4 analyses.
+The Stage 4 experiments were not independently rerun in the clean clone
+during the November 14 verification.

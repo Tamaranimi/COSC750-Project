@@ -1,0 +1,27 @@
+{
+  "comparison": "SVM class_weight only; independent fitting and calibration per variant",
+  "weights": {
+    "weighted_1_100": {
+      "0": 1,
+      "1": 100
+    },
+    "unweighted": null
+  },
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "prevalence": 0.01,
+  "false_positive_cost": 1.0,
+  "false_negative_cost": 100.0,
+  "same_data_splits": "Monday-Wednesday fit/calibration; Thursday validation; Friday test",
+  "cv": "GroupKFold(3), average_precision; same C and gamma grid",
+  "calibration": "Platt sigmoid on disjoint training calibration blocks",
+  "prior_adjustment": "source calibration prevalence to target prevalence",
+  "threshold": "Thursday validation expected-cost minimization",
+  "test_policy": "Friday labels used only for final evaluation",
+  "data_directory": "C:\\Users\\kenan\\OneDrive\\Desktop\\BSU\\Courses\\Doctoral Courses\\Fall 2026\\COSC 750\\Project\\Stage 3 files\\CICIDS2017_Timestamped_Clean"
+}

@@ -1,0 +1,15 @@
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local datasets
+*.parquet
+*.pcap
+*.pcapng
+
+# Regenerable verification outputs
+verification_stage4_final/

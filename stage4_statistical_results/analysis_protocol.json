@@ -1,0 +1,13 @@
+{
+  "test": "Two-sided one-sample t-test of paired seed differences",
+  "confidence_interval": "95% Student t interval, df=4",
+  "multiplicity": "Holm adjustment across five exploratory ablation comparisons",
+  "difference": "cost(first) - cost(second); positive favors second",
+  "limitation": "Five random seeds share one temporal dataset; independence and normality are not established",
+  "zero_difference_policy": "Exactly zero paired differences: p=1; constant nonzero differences: t-test undefined",
+  "model_training": "None; reads existing CSVs only",
+  "inputs": [
+    "stage4_ablation_results/ablation_runs.csv",
+    "stage4_svm_weight_results/svm_weight_runs.csv"
+  ]
+}
