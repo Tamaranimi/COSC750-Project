@@ -1,32 +1,34 @@
-# COSC 750 — Stage 4 submission synchronization
+# COSC 750 — Stage 4 final submission
 
-This branch was created from the **existing immutable `final` tag**, commit `916fe15836e10ceb8d0fb2c69d1e65cb49370ce6`.
+This branch is based on the original `final` tag, commit `916fe15836e10ceb8d0fb2c69d1e65cb49370ce6`. The historical tag is intentionally unchanged.
 
-## Intended submission files
+## Files
 
-- `Paper/COSC750_Stage4_Final_Paper.pdf` — corrected final paper
-- `Paper/COSC750_Stage4_Overleaf_Source.zip` — paper source, CSVs, regeneration script, Figures 2–4
-- `Presentation/COSC750_Stage4_Final_Slides.pptx` — corrected 17-slide PowerPoint, **unchanged**
-- `Presentation/COSC750_Stage4_Final_Slides.pdf` — corresponding presentation PDF
-- `Reproducibility/COSC750_Slide_Chart_Reproducibility.zip` — seven chart PNGs, nine CSV files, `regenerate_slide_charts.py`, README
+### Paper
+- [Final paper (PDF)](Paper/COSC750_Stage4_Final_Paper.pdf)
+- [Overleaf source and paper figures (ZIP)](Paper/COSC750_Stage4_Overleaf_Source.zip) — LaTeX, references, saved CSVs, figure-regeneration script, and Figures 2–4.
 
-## Reproduction notes
+### Presentation
+- [Corrected PowerPoint (PPTX)](Presentation/COSC750_Stage4_Final_Slides.pptx) — unchanged 17-slide deck.
+- [Presentation PDF](Presentation/COSC750_Stage4_Final_Slides.pdf)
 
-The slide-chart package uses `numpy` and `matplotlib`:
+### Reproducibility
+- [Slide chart reproduction package (ZIP)](Reproducibility/COSC750_Slide_Chart_Reproducibility.zip) — seven chart PNGs for slides 6–12, nine CSV inputs, Python script, and instructions.
+
+## Chart regeneration
+
+Extract the chart ZIP, then follow its included README. The script uses Python with NumPy and Matplotlib:
 
 ```bash
 python -m pip install numpy matplotlib
 python regenerate_slide_charts.py
 ```
 
-The charts represent slides 6–12. Source tables were transcribed from the manuscript where indicated in the chart-package README. Regenerated charts are numerically equivalent but not pixel-identical to the PowerPoint charts; this is **not** a rerun of the full machine-learning experiments.
+The chart package reproduces the reported numerical content, not pixel-identical PowerPoint graphics or a complete rerun of the ML experiments. Some CSV values were transcribed from manuscript tables as documented in the chart-package README.
 
-## Verification and submission constraints
+## Submission notes
 
-- Existing `final` tag remains untouched at `916fe15`.
-- The paper's page count is accepted.
-- Presentation time is **10 minutes total**.
-- Do not replace or restyle the corrected PowerPoint's embedded charts.
-- Do not claim the five binary deliverables have been synchronized until each has been uploaded and checked on this branch.
-
-**Status:** This manifest was committed first. Binary artifacts require separate transfer and verification.
+- Paper page count is accepted.
+- Presentation duration is **10 minutes total**.
+- Existing `final` tag is preserved at `916fe15`.
+- The presentation's embedded charts and design were not modified.
